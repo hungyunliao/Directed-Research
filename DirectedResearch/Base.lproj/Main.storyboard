@@ -23,7 +23,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi-Kashown" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsS-oZ-aIp">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="58"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -74,6 +74,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeS-BT-Gbv">
                                         <rect key="frame" x="0.0" y="522" width="560" height="58"/>
                                         <state key="normal" title="Submit"/>
+                                        <connections>
+                                            <action selector="submit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fMz-Vb-xDm"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -86,6 +89,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Uyq-NA-Egp" secondAttribute="trailing" id="njw-Kv-Wuw"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="input1" destination="Qsw-yI-cHM" id="E1w-6H-pqo"/>
+                        <outlet property="input2" destination="Hju-nC-3nN" id="LWr-Wd-U8L"/>
+                        <outlet property="input3" destination="Zcw-wl-CaW" id="uaP-t9-PNn"/>
+                        <outlet property="input4" destination="d1a-vq-2IG" id="KU2-kb-t6M"/>
+                        <outlet property="label1" destination="eu6-U4-FkI" id="GrQ-8x-cX3"/>
+                        <outlet property="label2" destination="QId-CL-4AQ" id="2LT-Ve-j1G"/>
+                        <outlet property="label3" destination="TjK-Ne-4uT" id="OLK-vu-pT7"/>
+                        <outlet property="label4" destination="fxb-IA-p3V" id="5uA-NL-3jA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
