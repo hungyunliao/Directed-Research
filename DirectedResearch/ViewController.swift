@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    let bankName = ["BoA", "Chase", "Citi", "HSBC"]
-    var bankChoose: String = "BoA"
+    let bankName = ["American Express", "BB&T", "Bank of America", "Capital One 360", "Charles Schwab", "Chase", "Citi", "Fidelity", "Navy Federal Credit Union", "PNC", "SunTrust", "TD Bank", "US Bank", "USAA", "Wells Fargo"]
+    let typeOfBankName = ["amex", "bbt", "bofa", "capone360", "schwab", "chase", "citi", "fidelity", "nfcu", "pnc", "suntrust", "td", "us", "usaa", "wells"]
+    var bankChoose: String = "American Express"
+    var typeOfBankChoose: String = "amex"
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -27,7 +29,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         bankChoose = bankName[row]
-        print("name of the bank: \(bankName[row])")
+        typeOfBankChoose = typeOfBankName[row]
+        print("type of the bank: \(typeOfBankChoose)")
     }
     
 
@@ -45,27 +48,29 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBAction func submit(sender: UIButton) {
         
-        let input = ( userName: input3.text, password: input4.text)
+        let input = (userName: input3.text, password: input4.text)
         
         let meg = "The bank you choose is: \(bankChoose) \n The Username is: \(input.userName!) \n"
         let myAlert = UIAlertController(title: "Hello", message: meg, preferredStyle: .Alert)
         
-        let okAction = UIAlertAction(title: "Ok", style: .Default,
+        let okAction = UIAlertAction(title: "Yes", style: .Default,
                                      handler:  {
                                         (action:UIAlertAction) -> () in
-                                        print("Ok")
+                                        print("Yes")
                                         self.dismissViewControllerAnimated(true, completion: nil)
             })
         
-//        let cancelAction = UIAlertAction( title: "So So", style: .Default,
-//                                          handler: {
-//                                            (action: UIAlertAction) -> () in
-//                                            print("so so")
-//                                            self.dismissViewControllerAnimated(true, completion: nil)
-//        })
+        let cancelAction = UIAlertAction( title: "No", style: .Default,
+                                          handler: {
+                                            (action: UIAlertAction) -> () in
+                                            print("No")
+                                            self.input3.text = ""
+                                            self.input4.text = ""
+                                            self.dismissViewControllerAnimated(true, completion: nil)
+        })
         
         myAlert.addAction(okAction)
-        //myAlert.addAction(cancelAction)
+        myAlert.addAction(cancelAction)
         self.presentViewController(myAlert, animated: true, completion: nil)
     }
 
