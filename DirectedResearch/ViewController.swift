@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     let bankName = ["BoA", "Chase", "Citi", "HSBC"]
+    var bankChoose: String = "BoA"
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -25,15 +26,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        bankChoose = bankName[row]
         print("name of the bank: \(bankName[row])")
     }
     
-    @IBOutlet weak var label1: UILabel!
+
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var label4: UILabel!
-    @IBOutlet weak var input1: UITextField!
-    @IBOutlet weak var input2: UITextField!
     @IBOutlet weak var input3: UITextField!
     @IBOutlet weak var input4: UITextField!
     
@@ -44,11 +44,29 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func submit(sender: UIButton) {
-        let input = (one: input1.text, two: input2.text, three: input3.text, four: input4.text)
-        label1.text = input.one
-        label2.text = input.two
-        label3.text = input.three
-        label4.text = input.four
+        
+        let input = ( userName: input3.text, password: input4.text)
+        
+        let meg = "The bank you choose is: \(bankChoose) \n The Username is: \(input.userName!) \n"
+        let myAlert = UIAlertController(title: "Hello", message: meg, preferredStyle: .Alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .Default,
+                                     handler:  {
+                                        (action:UIAlertAction) -> () in
+                                        print("Ok")
+                                        self.dismissViewControllerAnimated(true, completion: nil)
+            })
+        
+//        let cancelAction = UIAlertAction( title: "So So", style: .Default,
+//                                          handler: {
+//                                            (action: UIAlertAction) -> () in
+//                                            print("so so")
+//                                            self.dismissViewControllerAnimated(true, completion: nil)
+//        })
+        
+        myAlert.addAction(okAction)
+        //myAlert.addAction(cancelAction)
+        self.presentViewController(myAlert, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
