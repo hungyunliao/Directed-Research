@@ -15,19 +15,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var bankChoose: String = "American Express"
     var typeOfBankChoose: String = "amex"
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return bankName.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return bankName[row]
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         bankChoose = bankName[row]
         typeOfBankChoose = typeOfBankName[row]
         print("type of the bank: \(typeOfBankChoose)")
@@ -46,32 +46,32 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     
-    @IBAction func submit(sender: UIButton) {
+    @IBAction func submit(_ sender: UIButton) {
         
         let input = (userName: input3.text, password: input4.text)
         
         let meg = "The bank you choose is: \(bankChoose) \n The Username is: \(input.userName!) \n"
-        let myAlert = UIAlertController(title: "Hello", message: meg, preferredStyle: .Alert)
+        let myAlert = UIAlertController(title: "Hello", message: meg, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Yes", style: .Default,
+        let okAction = UIAlertAction(title: "Yes", style: .default,
                                      handler:  {
                                         (action:UIAlertAction) -> () in
                                         print("Yes")
-                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                        self.dismiss(animated: true, completion: nil)
             })
         
-        let cancelAction = UIAlertAction( title: "No", style: .Default,
+        let cancelAction = UIAlertAction( title: "No", style: .default,
                                           handler: {
                                             (action: UIAlertAction) -> () in
                                             print("No")
                                             self.input3.text = ""
                                             self.input4.text = ""
-                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                            self.dismiss(animated: true, completion: nil)
         })
         
         myAlert.addAction(okAction)
         myAlert.addAction(cancelAction)
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
         
         postRequest(input.userName!, psw: input.password!)
         
@@ -79,28 +79,29 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     var responseString: String = ""
     
-    func postRequest(usrname: String, psw: String) {
+    func postRequest(_ usrname: String, psw: String) {
 //        let request = NSMutableURLRequest(URL: NSURL(string: "http://cs-server.usc.edu:33627/HW8/test.php?StreetName=2352Portland&City=LA&State=CA&Degree=us")!)
         let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
         
-        let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
-        request.HTTPMethod = "POST"
+        let request = NSMutableURLRequest(url: URL(string: urlString)!)
+        //var request = URLRequest(url:myUrl!)
+        request.httpMethod = "POST"
         //        let postString = "id=13&name=Jack"
         //        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             guard error == nil && data != nil else {                                                          // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
             
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
             
-            self.responseString = String(data: data!, encoding: NSUTF8StringEncoding)!
+            self.responseString = String(data: data!, encoding: String.Encoding.utf8)!
             print("responseString = \(self.responseString)")
-        }
+        }) 
         task.resume()
 
     }
@@ -112,11 +113,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+    override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         if (segue.identifier == "showJSON") {
-            let svc = segue!.destinationViewController as! DetailViewController;
+            let svc = segue!.destination as! DetailViewController;
             
             svc.toPass = responseString
+            print(responseString)
             
         }
     }
