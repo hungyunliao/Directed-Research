@@ -18,28 +18,28 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //textRegion.text = toPass
+        textRegion.text = toPass
         
         // get a reference to the d3 library in our project
-        let fileLocation = Bundle.main.path(forResource: "d3.min", ofType: "js")!
+        //let fileLocation = Bundle.main.path(forResource: "d3.min", ofType: "js")!
         // convert it to a string
-        let jsSource: String = try! String(contentsOfFile: fileLocation)
+        //let jsSource: String = try! String(contentsOfFile: fileLocation)
         // create a javascript context environment
-        let context = JSContext()
+        //let context = JSContext()
         // add exception handler so we can see any error that occur in our javascript
-        context?.exceptionHandler = { context, exception in
-            print("JS Error: \(exception)")
-        }
+        //context?.exceptionHandler = { context, exception in
+          //  print("JS Error: \(exception)")
+        //}
         // load in the javascript into our context
-        context?.evaluateScript(jsSource)
+        //context?.evaluateScript(jsSource)
         
-        let jsStr = "var testValue = 3"
+        //let jsStr = "var testValue = 3"
         
         // create our javascript function for the linear scale we also mix in swift with the maxAmount variale
         // context.evaluateScript("circles = d3.scale.quantize().domain([0,\(30000)]).range([3, 2, 1])")
-        context?.evaluateScript(jsStr)
-        let strr: JSValue = context!.evaluateScript("testValue")
-        textRegion.text = String(Int(strr.toInt32()))
+        //context?.evaluateScript(jsStr)
+        //let strr: JSValue = context!.evaluateScript("testValue")
+        //textRegion.text = String(Int(strr.toInt32()))
         
 //        // loop through all the contacts to determine which circle they should be placed in
 //        for contact in contacts {

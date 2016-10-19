@@ -16,6 +16,7 @@
 		134514E71DA3025900E23222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 134514E61DA3025900E23222 /* Assets.xcassets */; };
 		134514EA1DA3025900E23222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134514E81DA3025900E23222 /* LaunchScreen.storyboard */; };
 		134514F71DAEC69800E23222 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134514F61DAEC69800E23222 /* DetailViewController.swift */; };
+		13AD46B81DB8368E00379D5F /* ScrollableGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD46B71DB8368E00379D5F /* ScrollableGraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		134514E91DA3025900E23222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		134514EB1DA3025900E23222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		134514F61DAEC69800E23222 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		13AD46B71DB8368E00379D5F /* ScrollableGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollableGraphView.swift; path = "../../../../Downloads/Scrollable-GraphView-master/Classes/ScrollableGraphView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				134514DC1DA3025900E23222 /* AppDelegate.swift */,
 				134514DE1DA3025900E23222 /* ViewController.swift */,
 				134514F61DAEC69800E23222 /* DetailViewController.swift */,
+				13AD46B71DB8368E00379D5F /* ScrollableGraphView.swift */,
 				134514E01DA3025900E23222 /* Main.storyboard */,
 				134514F11DA3028B00E23222 /* supportingFiles */,
 			);
@@ -163,6 +166,7 @@
 				134514DF1DA3025900E23222 /* ViewController.swift in Sources */,
 				134514DD1DA3025900E23222 /* AppDelegate.swift in Sources */,
 				134514F71DAEC69800E23222 /* DetailViewController.swift in Sources */,
+				13AD46B81DB8368E00379D5F /* ScrollableGraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
