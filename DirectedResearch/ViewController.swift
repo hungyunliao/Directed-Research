@@ -77,11 +77,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
-    var responseString: String = ""
+    var responseString: Data? = nil
     
     func postRequest(_ usrname: String, psw: String) {
 //        let request = NSMutableURLRequest(URL: NSURL(string: "http://cs-server.usc.edu:33627/HW8/test.php?StreetName=2352Portland&City=LA&State=CA&Degree=us")!)
-        let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
+        //let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
+        let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=plaid_test&password=plaid_good&type=wells"
+        //let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
         
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
         //var request = URLRequest(url:myUrl!)
@@ -99,7 +101,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 print("response = \(response)")
             }
             
-            self.responseString = String(data: data!, encoding: String.Encoding.utf8)!
+            //self.responseString = String(data: data!, encoding: String.Encoding.utf8)!
+            self.responseString = data!
             print("responseString = \(self.responseString)")
         }) 
         task.resume()

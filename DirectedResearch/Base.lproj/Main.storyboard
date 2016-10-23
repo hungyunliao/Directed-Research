@@ -111,16 +111,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-iD-5ES">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j9-Q5-uGI">
+                                <frame key="frameInset" minX="10" minY="603" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Location"/>
+                                <connections>
+                                    <action selector="showLocation:" destination="1P7-Px-ivD" eventType="touchUpInside" id="7gz-tn-5fq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-Fn-1Fv">
+                                <frame key="frameInset" minX="77" minY="603" width="63" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Category"/>
+                                <connections>
+                                    <action selector="showCategory:" destination="1P7-Px-ivD" eventType="touchUpInside" id="JwC-e2-cGn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gdu-VZ-Kil" firstAttribute="trailing" secondItem="hfU-iD-5ES" secondAttribute="trailing" id="5tZ-p5-Whu"/>
+                            <constraint firstItem="gdu-VZ-Kil" firstAttribute="trailing" secondItem="hfU-iD-5ES" secondAttribute="trailing" id="5ZW-r5-4QP"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="6KQ-7e-a4i"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="trailing" secondItem="Qii-4K-zEl" secondAttribute="trailingMargin" id="6lg-Jo-nJJ"/>
-                            <constraint firstAttribute="bottom" secondItem="gdu-VZ-Kil" secondAttribute="bottom" constant="20" symbolic="YES" id="6or-bN-V58"/>
-                            <constraint firstItem="gdu-VZ-Kil" firstAttribute="leading" secondItem="hfU-iD-5ES" secondAttribute="leading" id="BMV-Q4-Gti"/>
+                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="gdu-VZ-Kil" secondAttribute="bottom" constant="72" id="TkO-U5-SEy"/>
+                            <constraint firstItem="gdu-VZ-Kil" firstAttribute="leading" secondItem="hfU-iD-5ES" secondAttribute="leading" id="Vsf-Qb-CuI"/>
+                            <constraint firstItem="gdu-VZ-Kil" firstAttribute="top" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="8" symbolic="YES" id="YF2-FH-KNa"/>
                             <constraint firstAttribute="bottom" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="295" id="dDd-81-9BT"/>
-                            <constraint firstItem="gdu-VZ-Kil" firstAttribute="top" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="8" symbolic="YES" id="wlq-p7-fsX"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="top" secondItem="VIf-wl-zrR" secondAttribute="bottom" constant="8" symbolic="YES" id="xWb-gC-0az"/>
                         </constraints>
                     </view>

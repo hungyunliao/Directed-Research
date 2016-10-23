@@ -13,56 +13,47 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var textRegion: UILabel!
     
-    @IBOutlet weak var dataVis: UIView!
-    var toPass:String!
     
-    private func dataVisualization() {
-        let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
+    @IBAction func showLocation(_ sender: AnyObject) {
         let data: [Double] = [30, 20, 10, 30, 10]
         let labels = ["NY", "SF", "LA", "SD", "SB", "R"]
-        graphView.set(data: data, withLabels: labels);
-        graphView.shouldDrawBarLayer = true
-        graphView.shouldDrawDataPoint = false
-        graphView.lineColor = UIColor.clear
+        
+        dataVisualization(data: data, labels: labels, showBar: true)
+    }
+    
+    @IBAction func showCategory(_ sender: AnyObject) {
+        let data: [Double] = [10, 30, 30, 10, 10]
+        let labels = ["Food", "Restaurant", "Bookstore", "Car", "Drink", "Acc"]
+        
+        dataVisualization(data: data, labels: labels, showBar: false)
+    }
+    
+    
+    @IBOutlet weak var dataVis: UIView!
+    var toPass:Data!
+    
+    private func dataVisualization(data: [Double], labels: [String], showBar: Bool) {
+        let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
+                graphView.set(data: data, withLabels: labels);
+        graphView.shouldDrawBarLayer = showBar
+        graphView.shouldDrawDataPoint = !showBar
+        if showBar {
+            graphView.lineColor = UIColor.clear
+        } else {
+            graphView.lineColor = UIColor.black
+        }
         dataVis.addSubview(graphView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataVisualization()
-        textRegion.text = toPass
-        
-        // get a reference to the d3 library in our project
-        //let fileLocation = Bundle.main.path(forResource: "d3.min", ofType: "js")!
-        // convert it to a string
-        //let jsSource: String = try! String(contentsOfFile: fileLocation)
-        // create a javascript context environment
-        //let context = JSContext()
-        // add exception handler so we can see any error that occur in our javascript
-        //context?.exceptionHandler = { context, exception in
-          //  print("JS Error: \(exception)")
-        //}
-        // load in the javascript into our context
-        //context?.evaluateScript(jsSource)
-        
-        //let jsStr = "var testValue = 3"
-        
-        // create our javascript function for the linear scale we also mix in swift with the maxAmount variale
-        // context.evaluateScript("circles = d3.scale.quantize().domain([0,\(30000)]).range([3, 2, 1])")
-        //context?.evaluateScript(jsStr)
-        //let strr: JSValue = context!.evaluateScript("testValue")
-        //textRegion.text = String(Int(strr.toInt32()))
-        
-//        // loop through all the contacts to determine which circle they should be placed in
-//        for contact in contacts {
-//            // get the circle number based on score it will return 1, 2 or 3
-//            let circle: JSValue = context.evaluateScript("radius_circles(\(contact.score))");
-//            //  cast the JSValue to Int
-//            contact.circle = Int(circle.toInt32())
-//        }
-//        // sort the contacts array based on the new circle value
-//        self.contacts.sortInPlace({ $0.circle < $1.circle })
-        
+        //textRegion.text = toPass
+        if let parsedData = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
+            
+            let transaction = parsedData["transactions"] as! [[String:Any]]
+            print("transactions")
+            print(transaction[0]["date"]!)
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -70,8 +61,6 @@ class DetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
-        
         
     }
     
