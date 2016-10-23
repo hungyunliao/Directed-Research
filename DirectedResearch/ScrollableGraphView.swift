@@ -1,6 +1,6 @@
 import UIKit
 
-// NOTE: This code from https://github.com/philackm/Scrollable-GraphView
+// NOTE: This code is from https://github.com/philackm/Scrollable-GraphView
 
 // MARK: - ScrollableGraphView
 @IBDesignable

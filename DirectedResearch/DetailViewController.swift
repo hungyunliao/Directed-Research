@@ -13,11 +13,23 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var textRegion: UILabel!
     
+    @IBOutlet weak var dataVis: UIView!
     var toPass:String!
+    
+    private func dataVisualization() {
+        let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
+        let data: [Double] = [30, 20, 10, 30, 10]
+        let labels = ["NY", "SF", "LA", "SD", "SB", "R"]
+        graphView.set(data: data, withLabels: labels);
+        graphView.shouldDrawBarLayer = true
+        graphView.shouldDrawDataPoint = false
+        graphView.lineColor = UIColor.clear
+        dataVis.addSubview(graphView)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataVisualization()
         textRegion.text = toPass
         
         // get a reference to the d3 library in our project

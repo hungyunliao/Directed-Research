@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1314E7E21DB7FE5D00700036 /* d3.js in Resources */ = {isa = PBXBuildFile; fileRef = 1314E7E01DB7FE5D00700036 /* d3.js */; };
-		1314E7E31DB7FE5D00700036 /* d3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 1314E7E11DB7FE5D00700036 /* d3.min.js */; };
 		134514DD1DA3025900E23222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134514DC1DA3025900E23222 /* AppDelegate.swift */; };
 		134514DF1DA3025900E23222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134514DE1DA3025900E23222 /* ViewController.swift */; };
 		134514E21DA3025900E23222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134514E01DA3025900E23222 /* Main.storyboard */; };
@@ -16,12 +14,10 @@
 		134514E71DA3025900E23222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 134514E61DA3025900E23222 /* Assets.xcassets */; };
 		134514EA1DA3025900E23222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134514E81DA3025900E23222 /* LaunchScreen.storyboard */; };
 		134514F71DAEC69800E23222 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134514F61DAEC69800E23222 /* DetailViewController.swift */; };
-		13AD46B81DB8368E00379D5F /* ScrollableGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD46B71DB8368E00379D5F /* ScrollableGraphView.swift */; };
+		13AD46BA1DBD25C000379D5F /* ScrollableGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AD46B91DBD25C000379D5F /* ScrollableGraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1314E7E01DB7FE5D00700036 /* d3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = d3.js; path = DirectedResearch/d3.js; sourceTree = "<group>"; };
-		1314E7E11DB7FE5D00700036 /* d3.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = d3.min.js; path = DirectedResearch/d3.min.js; sourceTree = "<group>"; };
 		134514D91DA3025900E23222 /* DirectedResearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DirectedResearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		134514DC1DA3025900E23222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		134514DE1DA3025900E23222 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,7 +27,7 @@
 		134514E91DA3025900E23222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		134514EB1DA3025900E23222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		134514F61DAEC69800E23222 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		13AD46B71DB8368E00379D5F /* ScrollableGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollableGraphView.swift; path = "../../../../Downloads/Scrollable-GraphView-master/Classes/ScrollableGraphView.swift"; sourceTree = "<group>"; };
+		13AD46B91DBD25C000379D5F /* ScrollableGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,8 +44,6 @@
 		134514D01DA3025900E23222 = {
 			isa = PBXGroup;
 			children = (
-				1314E7E01DB7FE5D00700036 /* d3.js */,
-				1314E7E11DB7FE5D00700036 /* d3.min.js */,
 				134514DB1DA3025900E23222 /* DirectedResearch */,
 				134514DA1DA3025900E23222 /* Products */,
 			);
@@ -69,7 +63,7 @@
 				134514DC1DA3025900E23222 /* AppDelegate.swift */,
 				134514DE1DA3025900E23222 /* ViewController.swift */,
 				134514F61DAEC69800E23222 /* DetailViewController.swift */,
-				13AD46B71DB8368E00379D5F /* ScrollableGraphView.swift */,
+				13AD46B91DBD25C000379D5F /* ScrollableGraphView.swift */,
 				134514E01DA3025900E23222 /* Main.storyboard */,
 				134514F11DA3028B00E23222 /* supportingFiles */,
 			);
@@ -147,11 +141,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1314E7E31DB7FE5D00700036 /* d3.min.js in Resources */,
 				134514EA1DA3025900E23222 /* LaunchScreen.storyboard in Resources */,
 				134514E71DA3025900E23222 /* Assets.xcassets in Resources */,
 				134514E21DA3025900E23222 /* Main.storyboard in Resources */,
-				1314E7E21DB7FE5D00700036 /* d3.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +158,7 @@
 				134514DF1DA3025900E23222 /* ViewController.swift in Sources */,
 				134514DD1DA3025900E23222 /* AppDelegate.swift in Sources */,
 				134514F71DAEC69800E23222 /* DetailViewController.swift in Sources */,
-				13AD46B81DB8368E00379D5F /* ScrollableGraphView.swift in Sources */,
+				13AD46BA1DBD25C000379D5F /* ScrollableGraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
