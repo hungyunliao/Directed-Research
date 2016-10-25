@@ -78,7 +78,7 @@
                             <rect key="frame" x="16" y="-12" width="343" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="Show JSON"/>
+                            <state key="normal" title="Show Analysis"/>
                             <connections>
                                 <segue destination="1P7-Px-ivD" kind="show" identifier="showJSON" id="jiJ-4y-d4J"/>
                             </connections>
@@ -109,8 +109,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdu-VZ-Kil">
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-iD-5ES">
@@ -119,25 +119,37 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8u6-mS-FCv">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j9-Q5-uGI">
-                                        <state key="normal" title="Location"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Location">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="showLocation:" destination="1P7-Px-ivD" eventType="touchUpInside" id="7gz-tn-5fq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-Fn-1Fv">
-                                        <state key="normal" title="Category"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Category">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="showCategory:" destination="1P7-Px-ivD" eventType="touchUpInside" id="JwC-e2-cGn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ni-sX-b38">
-                                        <state key="normal" title="Monthly$"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Monthly$">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="showMonthlyAmount:" destination="1P7-Px-ivD" eventType="touchUpInside" id="mgq-uh-lKb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtO-x6-crO">
-                                        <state key="normal" title="TransFreq"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="TransFreq">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="showTransFreq:" destination="1P7-Px-ivD" eventType="touchUpInside" id="oVn-x0-cUj"/>
                                         </connections>
@@ -150,7 +162,7 @@
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="trailing" secondItem="hfU-iD-5ES" secondAttribute="trailing" id="5ZW-r5-4QP"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="6KQ-7e-a4i"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="trailing" secondItem="Qii-4K-zEl" secondAttribute="trailingMargin" id="6lg-Jo-nJJ"/>
-                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="gdu-VZ-Kil" secondAttribute="bottom" id="TkO-U5-SEy"/>
+                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="gdu-VZ-Kil" secondAttribute="bottom" constant="50" id="TkO-U5-SEy"/>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="leading" secondItem="hfU-iD-5ES" secondAttribute="leading" id="Vsf-Qb-CuI"/>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="top" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="8" symbolic="YES" id="YF2-FH-KNa"/>
                             <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="8u6-mS-FCv" secondAttribute="bottom" constant="34" id="ctL-9W-9vI"/>

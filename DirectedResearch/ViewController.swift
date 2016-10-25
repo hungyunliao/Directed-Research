@@ -44,15 +44,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gradient = CAGradientLayer()
-        
-        gradient.colors = [UIColor.cyan.cgColor, UIColor.white.cgColor]
-        gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
-        self.view.layer.insertSublayer(gradient, at: 0)
+        let gradientBackground = gradient(frame: self.view.frame)
+        self.view.layer.insertSublayer(gradientBackground, at: 0)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
