@@ -26,13 +26,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuX-Rm-NBx">
-                                        <state key="normal" title="Show JSON"/>
-                                        <connections>
-                                            <segue destination="1P7-Px-ivD" kind="show" identifier="showJSON" id="jiJ-4y-d4J"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Institution:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QId-CL-4AQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BankName:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QId-CL-4AQ">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -70,7 +64,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.27734029189933795" green="1" blue="0.93871532284845405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dLi-gF-kzV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="1LY-kK-ldX"/>
                             <constraint firstItem="dLi-gF-kzV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AYH-M0-3S2"/>
@@ -78,7 +72,18 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dLi-gF-kzV" secondAttribute="bottom" id="mZp-PC-ATH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="c2C-Pa-xC1"/>
+                    <navigationItem key="navigationItem" id="c2C-Pa-xC1">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VuX-Rm-NBx">
+                            <rect key="frame" x="16" y="-12" width="343" height="67"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Show JSON"/>
+                            <connections>
+                                <segue destination="1P7-Px-ivD" kind="show" identifier="showJSON" id="jiJ-4y-d4J"/>
+                            </connections>
+                        </button>
+                    </navigationItem>
                     <connections>
                         <outlet property="input3" destination="Zcw-wl-CaW" id="uaP-t9-PNn"/>
                         <outlet property="input4" destination="d1a-vq-2IG" id="CDJ-vk-YD0"/>
@@ -111,33 +116,48 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-iD-5ES">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j9-Q5-uGI">
-                                <frame key="frameInset" minX="10" minY="603" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Location"/>
-                                <connections>
-                                    <action selector="showLocation:" destination="1P7-Px-ivD" eventType="touchUpInside" id="7gz-tn-5fq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-Fn-1Fv">
-                                <frame key="frameInset" minX="77" minY="603" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Category"/>
-                                <connections>
-                                    <action selector="showCategory:" destination="1P7-Px-ivD" eventType="touchUpInside" id="JwC-e2-cGn"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8u6-mS-FCv">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j9-Q5-uGI">
+                                        <state key="normal" title="Location"/>
+                                        <connections>
+                                            <action selector="showLocation:" destination="1P7-Px-ivD" eventType="touchUpInside" id="7gz-tn-5fq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-Fn-1Fv">
+                                        <state key="normal" title="Category"/>
+                                        <connections>
+                                            <action selector="showCategory:" destination="1P7-Px-ivD" eventType="touchUpInside" id="JwC-e2-cGn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ni-sX-b38">
+                                        <state key="normal" title="Monthly$"/>
+                                        <connections>
+                                            <action selector="showMonthlyAmount:" destination="1P7-Px-ivD" eventType="touchUpInside" id="mgq-uh-lKb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtO-x6-crO">
+                                        <state key="normal" title="TransFreq"/>
+                                        <connections>
+                                            <action selector="showTransFreq:" destination="1P7-Px-ivD" eventType="touchUpInside" id="oVn-x0-cUj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="trailing" secondItem="hfU-iD-5ES" secondAttribute="trailing" id="5ZW-r5-4QP"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="6KQ-7e-a4i"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="trailing" secondItem="Qii-4K-zEl" secondAttribute="trailingMargin" id="6lg-Jo-nJJ"/>
-                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="gdu-VZ-Kil" secondAttribute="bottom" constant="72" id="TkO-U5-SEy"/>
+                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="gdu-VZ-Kil" secondAttribute="bottom" id="TkO-U5-SEy"/>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="leading" secondItem="hfU-iD-5ES" secondAttribute="leading" id="Vsf-Qb-CuI"/>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="top" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="8" symbolic="YES" id="YF2-FH-KNa"/>
+                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="8u6-mS-FCv" secondAttribute="bottom" constant="34" id="ctL-9W-9vI"/>
                             <constraint firstAttribute="bottom" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="295" id="dDd-81-9BT"/>
+                            <constraint firstItem="8u6-mS-FCv" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="ffH-41-5HF"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="top" secondItem="VIf-wl-zrR" secondAttribute="bottom" constant="8" symbolic="YES" id="xWb-gC-0az"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8u6-mS-FCv" secondAttribute="trailing" id="zEW-2j-wpe"/>
                         </constraints>
                     </view>
                     <connections>
