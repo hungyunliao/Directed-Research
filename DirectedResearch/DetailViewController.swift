@@ -18,7 +18,7 @@ class DetailViewController: UIViewController {
         "year_and_month_total_consume": [
             ["date": "2014-05", "total": 19.97],
             ["date": "2014-04", "total": 272.12],
-            ["date": "2014-07", "total": 440],
+            ["date": "2014-07", "total": 440.0],
             ["date": "2014-06", "total": 2630.34]
         ],
         "location_total_consume": [
@@ -29,23 +29,40 @@ class DetailViewController: UIViewController {
             ["total": 7.23, "location": "Winston Salem"]
         ],
         "categoty_transaction_total_consume": [
-            ["total": 5.0, "name": "Transfer"],
-            ["total": 2.0, "name": "Shops"],
-            ["total": 4.0, "name": "Food and Drink"]
+            ["total": 880.0, "name": "Transfer"],
+            ["total": 2425.38, "name": "Shops"],
+            ["total": 44.31, "name": "Food and Drink"]
         ],
+        "transfer_total_amount": 480,
         "transaction_consume_total": 3362.4300000000003,
         "transaction_consume_number": 12,
         "category_transaction_consume_percent": [
-            ["percent": 0.4166666666666667, "name": "Transfer"],
-            ["percent": 0.16666666666666666, "name": "Shops"],
-            ["percent": 0.3333333333333333, "name": "Food and Drink"]
+            ["percent": 73.333, "name": "Transfer"],
+            ["percent": 202.115, "name": "Shops"],
+            ["percent": 3.69, "name": "Food and Drink"]
         ]
     ]
+    
+    var monthAmount : [[String:Any]]? = nil
+    var monthAmountLeng : Int? = nil
+    
+    var locationAmount : [[String:Any]]? = nil
+    var locationAmountLeng : Int? = nil
+    
+    var categoryAmount : [[String:Any]]? = nil
+    var categoryAmountLeng : Int? = nil
+    
+    var totalAmount : Double? = nil
+    
+    var totalNumber : Int? = nil
+    
+    var categoryPercent : [[String:Any]]? = nil
+    var categoryPercentLeng : Int? = nil
     
     
     @IBAction func showLocation(_ sender: AnyObject) {
         textRegion.text = "This is your statistics for the Locations that you made the purchase."
-        
+        /*
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             let transaction = json["transactions"] as! [[String:Any]]
             print("transactions")
@@ -56,12 +73,24 @@ class DetailViewController: UIViewController {
             
             dataVisualization(data: data, labels: labels as! [String], showBar: true)
         }
+        */
+        var data: [Double] = []
+        var labels: [String] = []
+
+        for i in 0..<locationAmount!.count {
+            data.append(locationAmount?[i]["total"] as! Double)
+            labels.append(locationAmount?[i]["location"] as! String)
+        }
+ 
+        //var data: [Double] = [monthAmount?[0]["total"] as! Double, 0]
+        
+        dataVisualization(data: data, labels: labels, showBar: true)
         
     }
     
     @IBAction func showCategory(_ sender: AnyObject) {
         textRegion.text = "This is your statistics for the Categories that your purchases belong to."
-        
+        /*
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             let transaction = json["transactions"] as! [[String:Any]]
             print("transactions")
@@ -72,12 +101,22 @@ class DetailViewController: UIViewController {
             
             dataVisualization(data: data, labels: labels as! [String], showBar: true)
         }
+        */
+        var data: [Double] = []
+        var labels: [String] = []
+        
+        for i in 0..<categoryAmount!.count {
+            data.append(categoryAmount?[i]["total"] as! Double)
+            labels.append(categoryAmount?[i]["name"] as! String)
+        }
+        
+        dataVisualization(data: data, labels: labels, showBar: true)
         
     }
     
     @IBAction func showMonthlyAmount(_ sender: AnyObject) {
         textRegion.text = "This is your statistics for the average purcahse amount."
-        
+        /*
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             let transaction = json["transactions"] as! [[String:Any]]
             print("transactions")
@@ -88,11 +127,23 @@ class DetailViewController: UIViewController {
             
             dataVisualization(data: data, labels: labels as! [String], showBar: false)
         }
+        */
+        
+        var data: [Double] = []
+        var labels: [String] = []
+        
+        for i in 0..<monthAmount!.count {
+            data.append(monthAmount?[i]["total"] as! Double)
+            labels.append(monthAmount?[i]["date"] as! String)
+        }
+        
+        dataVisualization(data: data, labels: labels, showBar: false)
     }
     
     @IBAction func showTransFreq(_ sender: AnyObject) {
         textRegion.text = "This is your statistics for your transfer frequency."
         
+        /*
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             let transaction = json["transactions"] as! [[String:Any]]
             print("transactions")
@@ -103,6 +154,19 @@ class DetailViewController: UIViewController {
             
             dataVisualization(data: data, labels: labels as! [String], showBar: false)
         }
+         */
+        
+        var data: [Double] = []
+        var labels: [String] = []
+        
+        for i in 0..<categoryPercent!.count {
+            data.append(categoryPercent?[i]["percent"] as! Double)
+            labels.append(categoryPercent?[i]["name"] as! String)
+        }
+        
+        //var data: [Double] = [monthAmount?[0]["total"] as! Double, 0]
+        
+        dataVisualization(data: data, labels: labels, showBar: false)
         
     }
     
@@ -122,6 +186,7 @@ class DetailViewController: UIViewController {
         }
         graphView.backgroundFillColor = UIColor.clear
         graphView.shouldAdaptRange = true
+        graphView.dataPointSpacing = 80
         dataVis.addSubview(graphView)
     }
     
@@ -134,8 +199,20 @@ class DetailViewController: UIViewController {
         let gradientBackground = gradient(frame: self.view.frame)
         self.view.layer.insertSublayer(gradientBackground, at: 0)
         
-        print("hereherehere")
-        print(JSONSerialization.isValidJSONObject(JSO))
+        monthAmount = JSO["year_and_month_total_consume"] as! [[String : Any]]?
+        monthAmountLeng = monthAmount?.count
+        
+        locationAmount = JSO["location_total_consume"] as! [[String:Any]]?
+        locationAmountLeng = locationAmount?.count
+        
+        categoryAmount = JSO["categoty_transaction_total_consume"] as! [[String:Any]]?
+        categoryAmountLeng = categoryAmount?.count
+        
+        totalAmount = JSO["transaction_consume_total"] as! Double?
+        totalNumber = JSO["transaction_consume_number"] as! Int?
+        
+        categoryPercent = JSO["category_transaction_consume_percent"] as! [[String:Any]]?
+        categoryPercentLeng = categoryPercent?.count
         
         // Do any additional setup after loading the view.
     }
