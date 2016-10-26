@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
             print(transaction[0]["date"]!)
             
             let data: [Double] = [30, 20, 10, 30, 10]
-            let labels = [transaction[0]["date"]!, "SF", "LA", "SD", "SB", "R"]
+            let labels = ["NY", "SF", "LA", "SD", "SB", "R"]
             
             dataVisualization(data: data, labels: labels as! [String], showBar: true)
         }
@@ -40,10 +40,10 @@ class DetailViewController: UIViewController {
             print("transactions")
             print(transaction[0]["date"]!)
             
-            let data: [Double] = [30, 20, 10, 30, 10]
-            let labels = [transaction[0]["date"]!, "SF", "LA", "SD", "SB", "R"]
+            let data: [Double] = [20, 30, 30, 10, 10]
+            let labels = ["Food", "Drinks", "Entertain", "Restaurant", "Bookstore"]
             
-            dataVisualization(data: data, labels: labels as! [String], showBar: false)
+            dataVisualization(data: data, labels: labels as! [String], showBar: true)
         }
         
     }
@@ -56,8 +56,8 @@ class DetailViewController: UIViewController {
             print("transactions")
             print(transaction[0]["date"]!)
             
-            let data: [Double] = [30, 20, 10, 30, 10]
-            let labels = [transaction[0]["date"]!, "SF", "LA", "SD", "SB", "R"]
+            let data: [Double] = [378, 295, 598, 100, 1009]
+            let labels = ["May.16", "Jun.16", "Jul.16", "Aug.16", "Sep.16", "Oct.16"]
             
             dataVisualization(data: data, labels: labels as! [String], showBar: false)
         }
@@ -71,8 +71,8 @@ class DetailViewController: UIViewController {
             print("transactions")
             print(transaction[0]["date"]!)
             
-            let data: [Double] = [30, 20, 10, 30, 10]
-            let labels = [transaction[0]["date"]!, "SF", "LA", "SD", "SB", "R"]
+            let data: [Double] = [17, 30, 0, 25, 10]
+            let labels = ["May.16", "Jun.16", "Jul.16", "Aug.16", "Sep.16", "Oct.16"]
             
             dataVisualization(data: data, labels: labels as! [String], showBar: false)
         }
@@ -93,6 +93,7 @@ class DetailViewController: UIViewController {
             graphView.lineColor = UIColor.black
         }
         graphView.backgroundFillColor = UIColor.clear
+        graphView.shouldAdaptRange = true
         dataVis.addSubview(graphView)
     }
     
@@ -100,7 +101,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         textRegion.text = "Please press the following buttons for your statistical consumption anaylisis."
         
-        dataVis.backgroundColor = UIColor.clear
+        dataVis.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         
         let gradientBackground = gradient(frame: self.view.frame)
         self.view.layer.insertSublayer(gradientBackground, at: 0)

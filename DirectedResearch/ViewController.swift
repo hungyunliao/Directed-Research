@@ -51,8 +51,33 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func submit(_ sender: UIButton) {
-        
         let input = (userName: input3.text, password: input4.text)
+        let inValChar = ["@", "#","%", "^", "&", "*", "(", ")", "-", "+", "=", "{", "}"]
+        var isValid = true
+        
+        for character in inValChar {
+            if input.userName!.contains(character) {
+                isValid = false
+                break
+            }
+        }
+        
+        let invalidInput = UIAlertController(title: "Invalid input!", message: "error", preferredStyle: .alert)
+        
+        if !isValid || input.userName?.trimmingCharacters(in: [" "]) == "" || input.password?.trimmingCharacters(in: [" "]) == "" {
+            let okAction = UIAlertAction(title: "Ok", style: .default,
+                                         handler:  {
+                                            (action:UIAlertAction) -> () in
+                                            print("Yes")
+                                            self.dismiss(animated: true, completion: nil)
+            })
+            self.present(invalidInput, animated: true, completion: nil)
+            invalidInput.addAction(okAction)
+            return
+        }
+        print("trimmed value")
+        print(input.userName?.contains("%"))
+        
         
         let meg = "The bank you choose is: \(bankChoose) \n The Username is: \(input.userName!) \n"
         let myAlert = UIAlertController(title: "Hello", message: meg, preferredStyle: .alert)
@@ -132,4 +157,5 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
 
 }
+
 
