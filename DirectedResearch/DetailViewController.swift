@@ -14,6 +14,33 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var textRegion: UILabel!
     @IBOutlet weak var dataVis: UIView!
     var toPass:Data!
+    let JSO:[String:Any] = [
+        "year_and_month_total_consume": [
+            ["date": "2014-05", "total": 19.97],
+            ["date": "2014-04", "total": 272.12],
+            ["date": "2014-07", "total": 440],
+            ["date": "2014-06", "total": 2630.34]
+        ],
+        "location_total_consume": [
+            ["total": 2587.15, "location": "San Francisco"],
+            ["total": 5.32, "location": "Atlanta"],
+            ["total": 15.93, "location": "New York"],
+            ["total": 28.57, "location": "Metairie"],
+            ["total": 7.23, "location": "Winston Salem"]
+        ],
+        "categoty_transaction_total_consume": [
+            ["total": 5.0, "name": "Transfer"],
+            ["total": 2.0, "name": "Shops"],
+            ["total": 4.0, "name": "Food and Drink"]
+        ],
+        "transaction_consume_total": 3362.4300000000003,
+        "transaction_consume_number": 12,
+        "category_transaction_consume_percent": [
+            ["percent": 0.4166666666666667, "name": "Transfer"],
+            ["percent": 0.16666666666666666, "name": "Shops"],
+            ["percent": 0.3333333333333333, "name": "Food and Drink"]
+        ]
+    ]
     
     
     @IBAction func showLocation(_ sender: AnyObject) {
@@ -85,6 +112,7 @@ class DetailViewController: UIViewController {
         }
         let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
                 graphView.set(data: data, withLabels: labels);
+        
         graphView.shouldDrawBarLayer = showBar
         graphView.shouldDrawDataPoint = !showBar
         if showBar {
@@ -105,6 +133,9 @@ class DetailViewController: UIViewController {
         
         let gradientBackground = gradient(frame: self.view.frame)
         self.view.layer.insertSublayer(gradientBackground, at: 0)
+        
+        print("hereherehere")
+        print(JSONSerialization.isValidJSONObject(JSO))
         
         // Do any additional setup after loading the view.
     }
