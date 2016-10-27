@@ -116,60 +116,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-iD-5ES">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8u6-mS-FCv">
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j9-Q5-uGI">
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Location">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="showLocation:" destination="1P7-Px-ivD" eventType="touchUpInside" id="7gz-tn-5fq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdt-Fn-1Fv">
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Category">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="showCategory:" destination="1P7-Px-ivD" eventType="touchUpInside" id="JwC-e2-cGn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ni-sX-b38">
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Monthly$">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="showMonthlyAmount:" destination="1P7-Px-ivD" eventType="touchUpInside" id="mgq-uh-lKb"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtO-x6-crO">
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="TransFreq">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="showTransFreq:" destination="1P7-Px-ivD" eventType="touchUpInside" id="oVn-x0-cUj"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="rSD-L9-m0i">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Location"/>
+                                    <segment title="Category"/>
+                                    <segment title="Monthly $"/>
+                                    <segment title="Trans Freq"/>
+                                </segments>
+                                <connections>
+                                    <action selector="shownDataType:" destination="1P7-Px-ivD" eventType="valueChanged" id="cAW-6x-YWJ"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="trailing" secondItem="hfU-iD-5ES" secondAttribute="trailing" id="5ZW-r5-4QP"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="6KQ-7e-a4i"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="trailing" secondItem="Qii-4K-zEl" secondAttribute="trailingMargin" id="6lg-Jo-nJJ"/>
+                            <constraint firstItem="rSD-L9-m0i" firstAttribute="leading" secondItem="gdu-VZ-Kil" secondAttribute="leading" id="FQn-dH-zel"/>
+                            <constraint firstAttribute="bottom" secondItem="rSD-L9-m0i" secondAttribute="bottom" constant="20" symbolic="YES" id="PDW-2w-xyw"/>
                             <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="gdu-VZ-Kil" secondAttribute="bottom" constant="80" id="TkO-U5-SEy"/>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="leading" secondItem="hfU-iD-5ES" secondAttribute="leading" id="Vsf-Qb-CuI"/>
                             <constraint firstItem="gdu-VZ-Kil" firstAttribute="top" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="8" symbolic="YES" id="YF2-FH-KNa"/>
-                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="8u6-mS-FCv" secondAttribute="bottom" constant="34" id="ctL-9W-9vI"/>
                             <constraint firstAttribute="bottom" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="245" id="dDd-81-9BT"/>
-                            <constraint firstItem="8u6-mS-FCv" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="ffH-41-5HF"/>
+                            <constraint firstItem="rSD-L9-m0i" firstAttribute="trailing" secondItem="gdu-VZ-Kil" secondAttribute="trailing" id="tho-0F-3KA"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="top" secondItem="VIf-wl-zrR" secondAttribute="bottom" constant="8" symbolic="YES" id="xWb-gC-0az"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8u6-mS-FCv" secondAttribute="trailing" id="zEW-2j-wpe"/>
                         </constraints>
                     </view>
                     <connections>

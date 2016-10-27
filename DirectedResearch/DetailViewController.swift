@@ -61,62 +61,59 @@ class DetailViewController: UIViewController {
     
     var categoryPercent : [[String:Any]]? = nil
     var categoryPercentLeng : Int? = nil
-    
-    
-    @IBAction func showLocation(_ sender: AnyObject) {
-        textRegion.text = "This is your statistics for the Locations that you made the purchase."
 
+    
+    // Segment control
+    @IBAction func shownDataType(_ sender: UISegmentedControl) {
+        let index = sender.selectedSegmentIndex
+        var showString = ""
         var data: [Double] = []
         var labels: [String] = []
-
-        for i in 0..<locationAmount!.count {
-            data.append(locationAmount?[i]["total"] as! Double)
-            labels.append(locationAmount?[i]["location"] as! String)
+        var showBar = true
+        
+        switch index {
+        case 0:     // Location
+            showString = "This is your statistics for the Locations that you made the purchase."
+            
+            for i in 0..<locationAmount!.count {
+                data.append(locationAmount?[i]["total"] as! Double)
+                labels.append(locationAmount?[i]["location"] as! String)
+            }
+            break
+            
+        case 1:     // Category
+            showString = "This is your statistics for the Categories that your purchases belong to."
+            
+            for i in 0..<categoryAmount!.count {
+                data.append(categoryAmount?[i]["total"] as! Double)
+                labels.append(categoryAmount?[i]["name"] as! String)
+            }
+            break
+            
+        case 2:     // MonthlyAmount
+            showString = "This is your statistics for the average purcahse amount."
+            for i in 0..<monthAmount!.count {
+                data.append(monthAmount?[i]["total"] as! Double)
+                labels.append(monthAmount?[i]["date"] as! String)
+            }
+            showBar = false
+            break
+            
+        case 3:     // Transfer Frequency
+            showString = "This is your statistics for your transfer frequency."
+            for i in 0..<categoryPercent!.count {
+                data.append(categoryPercent?[i]["percent"] as! Double)
+                labels.append(categoryPercent?[i]["name"] as! String)
+            }
+            showBar = false
+            break
+        
+        default:
+            break
         }
         
-        dataVisualization(data: data, labels: labels, showBar: true)
-    }
-    
-    @IBAction func showCategory(_ sender: AnyObject) {
-        textRegion.text = "This is your statistics for the Categories that your purchases belong to."
-
-        var data: [Double] = []
-        var labels: [String] = []
-        
-        for i in 0..<categoryAmount!.count {
-            data.append(categoryAmount?[i]["total"] as! Double)
-            labels.append(categoryAmount?[i]["name"] as! String)
-        }
-        
-        dataVisualization(data: data, labels: labels, showBar: true)
-    }
-    
-    @IBAction func showMonthlyAmount(_ sender: AnyObject) {
-        textRegion.text = "This is your statistics for the average purcahse amount."
-        
-        var data: [Double] = []
-        var labels: [String] = []
-        
-        for i in 0..<monthAmount!.count {
-            data.append(monthAmount?[i]["total"] as! Double)
-            labels.append(monthAmount?[i]["date"] as! String)
-        }
-        
-        dataVisualization(data: data, labels: labels, showBar: false)
-    }
-    
-    @IBAction func showTransFreq(_ sender: AnyObject) {
-        textRegion.text = "This is your statistics for your transfer frequency."
-        
-        var data: [Double] = []
-        var labels: [String] = []
-        
-        for i in 0..<categoryPercent!.count {
-            data.append(categoryPercent?[i]["percent"] as! Double)
-            labels.append(categoryPercent?[i]["name"] as! String)
-        }
-
-        dataVisualization(data: data, labels: labels, showBar: false)
+        textRegion.text = showString
+        dataVisualization(data: data, labels: labels, showBar: showBar)
     }
     
     private func dataVisualization(data: [Double], labels: [String], showBar: Bool) {
@@ -148,6 +145,7 @@ class DetailViewController: UIViewController {
         dataVis.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         let gradientBackground = gradient(frame: self.view.frame)
         self.view.layer.insertSublayer(gradientBackground, at: 0)
+        
         
         /*
         // For onnected JSON
