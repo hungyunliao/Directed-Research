@@ -46,12 +46,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         let gradientBackground = gradient(frame: self.view.frame)
         self.view.layer.insertSublayer(gradientBackground, at: 0)
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     
     @IBAction func submit(_ sender: UIButton) {
         let input = (userName: input3.text, password: input4.text)
+        
+        // User input validation
         let inValChar = ["@", "#","%", "^", "&", "*", "(", ")", "-", "+", "=", "{", "}"]
         var isValid = true
         
@@ -75,10 +76,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             invalidInput.addAction(okAction)
             return
         }
-        print("trimmed value")
-        print(input.userName?.contains("%"))
         
-        
+        // Input info confirmation
         let meg = "The bank you choose is: \(bankChoose) \n The Username is: \(input.userName!) \n"
         let myAlert = UIAlertController(title: "Hello", message: meg, preferredStyle: .alert)
         
@@ -106,21 +105,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
+    // Segue data
     var responseString: Data? = nil
     
     func postRequest(_ usrname: String, psw: String) {
-//        let request = NSMutableURLRequest(URL: NSURL(string: "http://cs-server.usc.edu:33627/HW8/test.php?StreetName=2352Portland&City=LA&State=CA&Degree=us")!)
+        // Directly connect to Plaid
         //let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
-        let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=plaid_test&password=plaid_good&type=wells"
-        //let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
+        // Through Flask server
+        let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
         
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
-        //var request = URLRequest(url:myUrl!)
         request.httpMethod = "POST"
-        //        let postString = "id=13&name=Jack"
-        //        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+            guard error == nil && data != nil else {                        // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
@@ -130,12 +128,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 print("response = \(response)")
             }
             
-            //self.responseString = String(data: data!, encoding: String.Encoding.utf8)!
             self.responseString = data!
-            print("responseString = \(self.responseString)")
+            print("responseString = \(self.responseString)") // check if the JSON is returned
         }) 
         task.resume()
-
+        
     }
     
     
@@ -148,10 +145,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         if (segue.identifier == "showJSON") {
             let svc = segue!.destination as! DetailViewController;
-            
             svc.toPass = responseString
-            print(responseString)
-            
         }
     }
 
