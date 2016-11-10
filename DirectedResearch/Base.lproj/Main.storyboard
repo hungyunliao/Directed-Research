@@ -19,6 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cashFlowPic" translatesAutoresizingMaskIntoConstraints="NO" id="hNS-eP-BZQ"/>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dLi-gF-kzV">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi-Kashown" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsS-oZ-aIp">
@@ -68,14 +69,18 @@
                         <constraints>
                             <constraint firstItem="dLi-gF-kzV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="1LY-kK-ldX"/>
                             <constraint firstItem="dLi-gF-kzV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AYH-M0-3S2"/>
+                            <constraint firstItem="hNS-eP-BZQ" firstAttribute="top" secondItem="dLi-gF-kzV" secondAttribute="top" id="OdZ-Zl-99c"/>
+                            <constraint firstItem="hNS-eP-BZQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RH1-Vo-fwb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dLi-gF-kzV" secondAttribute="trailing" id="VMF-vk-hJQ"/>
+                            <constraint firstItem="hNS-eP-BZQ" firstAttribute="centerX" secondItem="dLi-gF-kzV" secondAttribute="centerX" id="kvi-dW-vhs"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dLi-gF-kzV" secondAttribute="bottom" id="mZp-PC-ATH"/>
+                            <constraint firstItem="hNS-eP-BZQ" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="oal-Xz-W4k"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c2C-Pa-xC1">
                         <nil key="title"/>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VuX-Rm-NBx">
-                            <rect key="frame" x="16" y="-11.5" width="343" height="67"/>
+                            <rect key="frame" x="16" y="-12" width="343" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="Show Analysis"/>
@@ -94,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1268" y="157"/>
+            <point key="canvasLocation" x="1268" y="156.97151424287858"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Vo9-ZX-JQj">
@@ -171,6 +176,9 @@
             <point key="canvasLocation" x="456" y="157"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cashFlowPic" width="400" height="400"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="g1q-yb-u2P"/>
     </inferredMetricsTieBreakers>

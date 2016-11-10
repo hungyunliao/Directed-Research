@@ -181,7 +181,7 @@ class DetailViewController: UIViewController {
         
         
         postRequest(account, psw: psw)
-        
+        /*
         // For connected JSON
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             if json.count == 1 {
@@ -204,9 +204,9 @@ class DetailViewController: UIViewController {
             }
             
         }
+        */
         
         
-        /*
         // For hard-code JSON
         monthAmount = JSO["year_and_month_total_consume"] as! [[String : Any]]?
         monthAmountLeng = monthAmount?.count
@@ -222,7 +222,7 @@ class DetailViewController: UIViewController {
         
         categoryPercent = JSO["category_transaction_consume_percent"] as! [[String:Any]]?
         categoryPercentLeng = categoryPercent?.count
-        */
+        
     }
     
     func postRequest(_ usrname: String, psw: String) {
