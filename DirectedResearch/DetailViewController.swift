@@ -181,9 +181,8 @@ class DetailViewController: UIViewController {
         
         
         postRequest(account, psw: psw)
-        sleep(1) // wait for data fetching
         
-        // For onnected JSON
+        // For connected JSON
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             if json.count == 1 {
                 print("something wrong.")
@@ -249,7 +248,12 @@ class DetailViewController: UIViewController {
             self.toPass = data!
             print("responseString = \(self.toPass)") // check if the JSON is returned
         })
+        
         task.resume()
+        
+        while toPass == nil {  // make sure the JSON file is indeed returned.
+            print("still nil")
+        }
         
     }
 
