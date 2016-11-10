@@ -26,6 +26,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        let myTitle = NSAttributedString(string: bankName[row], attributes: [NSFontAttributeName : UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.white])
+//        return String(describing: myTitle)
         return bankName[row]
     }
     
@@ -44,8 +46,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gradientBackground = gradient(frame: self.view.frame)
-        self.view.layer.insertSublayer(gradientBackground, at: 0)
+        //let gradientBackground = gradient(frame: self.view.frame)
+        //self.view.layer.insertSublayer(gradientBackground, at: 0)
+        self.view.backgroundColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
     }
     
     
@@ -101,7 +104,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         myAlert.addAction(cancelAction)
         self.present(myAlert, animated: true, completion: nil)
         
-        postRequest(input.userName!, psw: input.password!)
+        //postRequest(input.userName!, psw: input.password!)
         
     }
     
@@ -110,9 +113,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func postRequest(_ usrname: String, psw: String) {
         // Directly connect to Plaid
-        //let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
+        let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
         // Through Flask server
-        let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
+        // let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
         
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
         request.httpMethod = "POST"
@@ -144,8 +147,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         if (segue.identifier == "showJSON") {
+            print("in the showJSON")
             let svc = segue!.destination as! DetailViewController;
             svc.toPass = responseString
+        }
+        else if (segue.identifier == "test") {
+            print("in the test")
+            let svc = segue!.destination as! DetailViewController;
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+//                print("delay")
+//            })
+            //svc.toPass = responseString
+            svc.account = "plaid_test"
+            svc.psw = "plaid_good"
         }
     }
 

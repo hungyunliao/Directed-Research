@@ -23,7 +23,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi-Kashown" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsS-oZ-aIp">
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BankName:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QId-CL-4AQ">
@@ -59,6 +59,7 @@
                                         <state key="normal" title="Submit"/>
                                         <connections>
                                             <action selector="submit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fMz-Vb-xDm"/>
+                                            <segue destination="1P7-Px-ivD" kind="show" identifier="test" id="g1q-yb-u2P"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -75,7 +76,7 @@
                     <navigationItem key="navigationItem" id="c2C-Pa-xC1">
                         <nil key="title"/>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VuX-Rm-NBx">
-                            <rect key="frame" x="16" y="-12" width="343" height="67"/>
+                            <rect key="frame" x="16" y="-11.5" width="343" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="Show Analysis"/>
@@ -117,7 +118,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="rSD-L9-m0i">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="Location"/>
                                     <segment title="Category"/>
@@ -172,4 +172,7 @@
             <point key="canvasLocation" x="456" y="157"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="g1q-yb-u2P"/>
+    </inferredMetricsTieBreakers>
 </document>

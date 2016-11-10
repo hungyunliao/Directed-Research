@@ -13,7 +13,9 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var textRegion: UILabel!
     @IBOutlet weak var dataVis: UIView!
-    var toPass:Data!
+    var toPass: Data!
+    var account: String!
+    var psw: String!
     
     // Hard-coded Json file for testing use
     let JSO:[String:Any] = [
@@ -122,18 +124,48 @@ class DetailViewController: UIViewController {
         }
         
         let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
-        graphView.set(data: data, withLabels: labels)
-        graphView.shouldDrawBarLayer = showBar
-        graphView.shouldDrawDataPoint = !showBar
-        graphView.backgroundFillColor = UIColor.clear
+        
+        
+          graphView.set(data: data, withLabels: labels)
+//        graphView.shouldDrawBarLayer = showBar
+//        graphView.shouldDrawDataPoint = !showBar
+//        graphView.backgroundFillColor = UIColor.clear
         graphView.shouldAdaptRange = true
         graphView.dataPointSpacing = 80
+////        graphView.topMargin = 10
+////        graphView.bottomMargin = 10
+        graphView.shouldRangeAlwaysStartAtZero = true
+////        graphView.backgroundFillColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+////        graphView.lineStyle = ScrollableGraphViewLineStyle.smooth
+////        graphView.shouldFill = true
+//        if showBar {
+//            graphView.lineColor = UIColor.clear
+//        } else {
+//            graphView.lineColor = UIColor.black
+//        }
+        graphView.backgroundFillColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
-        if showBar {
-            graphView.lineColor = UIColor.clear
-        } else {
-            graphView.lineColor = UIColor.black
-        }
+        graphView.rangeMax = 50
+        
+        graphView.lineWidth = 1
+        graphView.lineColor = UIColor.init(colorLiteralRed: 119/255, green: 119/255, blue: 119/255, alpha: 1)
+        graphView.lineStyle = ScrollableGraphViewLineStyle.smooth
+        
+        graphView.shouldFill = true
+        graphView.fillType = ScrollableGraphViewFillType.gradient
+        graphView.fillColor = UIColor.init(colorLiteralRed: 85/255, green: 85/255, blue: 85/255, alpha: 1)
+        graphView.fillGradientType = ScrollableGraphViewGradientType.linear
+        graphView.fillGradientStartColor = UIColor.init(colorLiteralRed: 85/255, green: 85/255, blue: 85/255, alpha: 1)
+        graphView.fillGradientEndColor = UIColor.init(colorLiteralRed: 68/255, green: 68/255, blue: 68/255, alpha: 1)
+        
+        graphView.dataPointSpacing = 80
+        graphView.dataPointSize = 2
+        graphView.dataPointFillColor = UIColor.white
+        
+        graphView.referenceLineLabelFont = UIFont.boldSystemFont(ofSize: 8)
+        graphView.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
+        graphView.referenceLineLabelColor = UIColor.white
+        graphView.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
         
         dataVis.addSubview(graphView)
     }
@@ -141,13 +173,16 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textRegion.text = "Please press the following buttons for your statistical consumption anaylisis."
+        print("Detail Viewdidload")
+        //dataVis.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+        //let gradientBackground = gradient(frame: self.view.frame)
+        //self.view.layer.insertSublayer(gradientBackground, at: 0)
+        self.view.backgroundColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
-        dataVis.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        let gradientBackground = gradient(frame: self.view.frame)
-        self.view.layer.insertSublayer(gradientBackground, at: 0)
         
+        postRequest(account, psw: psw)
+        sleep(1) // wait for data fetching
         
-        /*
         // For onnected JSON
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
             if json.count == 1 {
@@ -170,8 +205,9 @@ class DetailViewController: UIViewController {
             }
             
         }
-        */
         
+        
+        /*
         // For hard-code JSON
         monthAmount = JSO["year_and_month_total_consume"] as! [[String : Any]]?
         monthAmountLeng = monthAmount?.count
@@ -187,6 +223,33 @@ class DetailViewController: UIViewController {
         
         categoryPercent = JSO["category_transaction_consume_percent"] as! [[String:Any]]?
         categoryPercentLeng = categoryPercent?.count
+        */
+    }
+    
+    func postRequest(_ usrname: String, psw: String) {
+        // Directly connect to Plaid
+        let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
+        // Through Flask server
+        // let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
+        
+        let request = NSMutableURLRequest(url: URL(string: urlString)!)
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil && data != nil else {                        // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            self.toPass = data!
+            print("responseString = \(self.toPass)") // check if the JSON is returned
+        })
+        task.resume()
         
     }
 
