@@ -14,23 +14,38 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var textRegion: UILabel!
     @IBOutlet weak var dataVis: UIView!
     var toPass: Data!
-    var account: String!
-    var psw: String!
+    @IBOutlet weak var table: UITableView!
     
     let animalArray = ["cat", "dog", "elephant", "rabbit"]
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if tableView == table {
+            return 1
+        }
+        else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return animalArray.count
+        if tableView == table {
+            return animalArray.count
+        }
+        else {
+            return animalArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = animalArray[indexPath.row]
-        return cell
+        if tableView == table {
+            return cell
+        }
+        else {
+            return cell
+        }
+        
     }
     
     // Hard-coded Json file for testing use
@@ -130,7 +145,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             break
         }
         
-        textRegion.text = showString
+        //textRegion.text = showString
         dataVisualization(data: data, labels: labels, showBar: showBar)
     }
     
@@ -142,23 +157,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
         
         
-          graphView.set(data: data, withLabels: labels)
-//        graphView.shouldDrawBarLayer = showBar
-//        graphView.shouldDrawDataPoint = !showBar
-//        graphView.backgroundFillColor = UIColor.clear
+        graphView.set(data: data, withLabels: labels)
         graphView.shouldAdaptRange = true
         graphView.dataPointSpacing = 80
-////        graphView.topMargin = 10
-////        graphView.bottomMargin = 10
         graphView.shouldRangeAlwaysStartAtZero = true
-////        graphView.backgroundFillColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
-////        graphView.lineStyle = ScrollableGraphViewLineStyle.smooth
-////        graphView.shouldFill = true
-//        if showBar {
-//            graphView.lineColor = UIColor.clear
-//        } else {
-//            graphView.lineColor = UIColor.black
-//        }
         graphView.backgroundFillColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
         graphView.rangeMax = 50
@@ -188,15 +190,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textRegion.text = "Please press the following buttons for your statistical consumption anaylisis."
-        print("Detail Viewdidload")
-        //dataVis.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        //let gradientBackground = gradient(frame: self.view.frame)
-        //self.view.layer.insertSublayer(gradientBackground, at: 0)
+        
+        table.delegate = self
+        table.dataSource = self
+        
         self.view.backgroundColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
         
-        postRequest(account, psw: psw)
         /*
         // For connected JSON
         if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
@@ -238,38 +238,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         categoryPercent = JSO["category_transaction_consume_percent"] as! [[String:Any]]?
         categoryPercentLeng = categoryPercent?.count
-        
-    }
-    
-    func postRequest(_ usrname: String, psw: String) {
-        // Directly connect to Plaid
-        let urlString = "https://tartan.plaid.com/connect?client_id=test_id&secret=test_secret&username=" + usrname + "&password=" + psw + "&type=wells"
-        // Through Flask server
-        // let urlString = "http://172.20.10.10:5000/login?client_id=test_id&secret=test_secret&bankAccount=" + usrname + "&bankPassword=" + psw + "&bankName=wells"
-        
-        let request = NSMutableURLRequest(url: URL(string: urlString)!)
-        request.httpMethod = "POST"
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            guard error == nil && data != nil else {                        // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse , httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            self.toPass = data!
-            print("responseString = \(self.toPass)") // check if the JSON is returned
-        })
-        
-        task.resume()
-        
-        while toPass == nil {  // make sure the JSON file is indeed returned.
-            print("still nil")
-        }
         
     }
 

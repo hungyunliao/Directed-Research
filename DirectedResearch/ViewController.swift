@@ -20,7 +20,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // MARK: model
     var login : LoginModel = LoginModel()
-    
+    var json: Data?
     
     // MARK: pickerview delegate
     let bankName = ["American Express", "BB&T", "Bank of America", "Capital One 360", "Charles Schwab", "Chase", "Citi", "Fidelity", "Navy Federal Credit Union", "PNC", "SunTrust", "TD Bank", "US Bank", "USAA", "Wells Fargo"]
@@ -67,6 +67,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         if login.inputValidation() {
             //showConfirmationAlert()
+            json = login.getReturnJson()
             return true
         } else {
             showInvalidAlert()
@@ -77,8 +78,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func prepare(for segue: (UIStoryboardSegue!), sender: Any!) {
         if (segue.identifier == "test") {
             let svc = segue!.destination as! DetailViewController
-            svc.account = input3.text
-            svc.psw = input4.text
+            svc.toPass = json
         }
     }
     
