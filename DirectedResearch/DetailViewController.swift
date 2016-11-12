@@ -9,13 +9,29 @@
 import UIKit
 import JavaScriptCore
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var textRegion: UILabel!
     @IBOutlet weak var dataVis: UIView!
     var toPass: Data!
     var account: String!
     var psw: String!
+    
+    let animalArray = ["cat", "dog", "elephant", "rabbit"]
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return animalArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = animalArray[indexPath.row]
+        return cell
+    }
     
     // Hard-coded Json file for testing use
     let JSO:[String:Any] = [
