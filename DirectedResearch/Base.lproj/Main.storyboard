@@ -100,7 +100,7 @@
         <!--Detail View Controller-->
         <scene sceneID="Vo9-ZX-JQj">
             <objects>
-                <viewController id="1P7-Px-ivD" customClass="DetailViewController" customModule="DirectedResearch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="1P7-Px-ivD" customClass="DetailViewController" customModule="DirectedResearch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VIf-wl-zrR"/>
                         <viewControllerLayoutGuide type="bottom" id="vTm-Jf-h7Q"/>
@@ -109,20 +109,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O3m-Kj-Abd">
-                                <frame key="frameInset" minX="16" minY="430" width="343" height="157"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="35" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O3m-Kj-Abd">
+                                <frame key="frameInset" minX="16" minY="430" width="343" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="DIc-CR-18O">
-                                        <rect key="frame" x="0.0" y="92" width="343" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="35" id="DIc-CR-18O" customClass="DataTableViewCell" customModule="DirectedResearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DIc-CR-18O" id="xyO-fo-4ke">
-                                            <frame key="frameInset" width="343" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" tableViewCell="DIc-CR-18O" id="xyO-fo-4ke">
+                                            <frame key="frameInset" width="343" height="34"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="QWC-eG-h4q">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAA-hX-e8L">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7e-Xn-nvI">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QWC-eG-h4q" secondAttribute="trailing" id="89W-UZ-Uas"/>
+                                                <constraint firstAttribute="topMargin" secondItem="QWC-eG-h4q" secondAttribute="top" id="VFW-NR-eLE"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="QWC-eG-h4q" secondAttribute="leading" id="ac1-eY-Tv5"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="column1" destination="FAA-hX-e8L" id="9ga-ie-7X7"/>
+                                            <outlet property="column2" destination="m7e-Xn-nvI" id="o1k-y3-JKT"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-iD-5ES">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -143,9 +169,9 @@
                         <constraints>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="leading" secondItem="Qii-4K-zEl" secondAttribute="leadingMargin" id="6KQ-7e-a4i"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="trailing" secondItem="Qii-4K-zEl" secondAttribute="trailingMargin" id="6lg-Jo-nJJ"/>
-                            <constraint firstAttribute="bottom" secondItem="rSD-L9-m0i" secondAttribute="bottom" constant="20" symbolic="YES" id="PDW-2w-xyw"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="rSD-L9-m0i" secondAttribute="leading" id="VSe-LS-BgA"/>
+                            <constraint firstItem="vTm-Jf-h7Q" firstAttribute="top" secondItem="rSD-L9-m0i" secondAttribute="bottom" constant="20" id="Ecn-pg-xuI"/>
                             <constraint firstAttribute="bottom" secondItem="hfU-iD-5ES" secondAttribute="bottom" constant="245" id="dDd-81-9BT"/>
+                            <constraint firstItem="rSD-L9-m0i" firstAttribute="centerX" secondItem="Qii-4K-zEl" secondAttribute="centerX" id="eJw-9K-ZWi"/>
                             <constraint firstItem="hfU-iD-5ES" firstAttribute="top" secondItem="VIf-wl-zrR" secondAttribute="bottom" constant="8" symbolic="YES" id="xWb-gC-0az"/>
                         </constraints>
                     </view>
@@ -163,7 +189,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0TT-3j-7QQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Iux-gq-HLj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iux-gq-HLj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -16,7 +16,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var toPass: Data!
     @IBOutlet weak var table: UITableView!
     
-    let animalArray = ["cat", "dog", "elephant", "rabbit"]
+    var tableCol1 = ["null"]
+    var tableCol2 = [0.0]
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == table {
@@ -29,16 +30,23 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == table {
-            return animalArray.count
+            return tableCol1.count
         }
         else {
-            return animalArray.count
+            return tableCol1.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = animalArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DataTableViewCell
+        
+        cell.column1.text = tableCol1[indexPath.row]
+        cell.column2.text = "$ " + String(tableCol2[indexPath.row])
+        
+        cell.backgroundColor = UIColor.clear
+        cell.column1.textColor = UIColor.white
+        cell.column2.textColor = UIColor.white
+        
         if tableView == table {
             return cell
         }
@@ -146,6 +154,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         //textRegion.text = showString
+        tableCol1 = labels
+        tableCol2 = data
+        table.reloadData()
         dataVisualization(data: data, labels: labels, showBar: showBar)
     }
     
@@ -193,6 +204,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         table.delegate = self
         table.dataSource = self
+        table.backgroundColor = UIColor.clear
+        table.separatorColor = UIColor.clear
         
         self.view.backgroundColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
