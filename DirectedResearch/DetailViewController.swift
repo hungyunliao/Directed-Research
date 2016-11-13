@@ -110,7 +110,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         var showString = ""
         var data: [Double] = []
         var labels: [String] = []
-        var showBar = true
         
         switch index {
         case 0:     // Location
@@ -137,7 +136,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 data.append(monthAmount?[i]["total"] as! Double)
                 labels.append(monthAmount?[i]["date"] as! String)
             }
-            showBar = false
             break
             
         case 3:     // Transfer Frequency
@@ -146,7 +144,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 data.append(categoryPercent?[i]["percent"] as! Double)
                 labels.append(categoryPercent?[i]["name"] as! String)
             }
-            showBar = false
             break
         
         default:
@@ -157,46 +154,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableCol1 = labels
         tableCol2 = data
         table.reloadData()
-        dataVisualization(data: data, labels: labels, showBar: showBar)
+        dataVis.addSubview((showDiagram?.dataVisualization(data: data, labels: labels))!)
     }
     
-    private func dataVisualization(data: [Double], labels: [String], showBar: Bool) {
-        for v in dataVis.subviews {
-            v.removeFromSuperview()
-        }
-        
-        let graphView = ScrollableGraphView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width * 0.9, height: self.view.frame.height/2))
-        
-        
-        graphView.set(data: data, withLabels: labels)
-        graphView.shouldAdaptRange = true
-        graphView.dataPointSpacing = 80
-        graphView.shouldRangeAlwaysStartAtZero = true
-        graphView.backgroundFillColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
-        
-        graphView.rangeMax = 50
-        
-        graphView.lineWidth = 1
-        graphView.lineColor = UIColor.init(colorLiteralRed: 119/255, green: 119/255, blue: 119/255, alpha: 1)
-        graphView.lineStyle = ScrollableGraphViewLineStyle.smooth
-        
-        graphView.shouldFill = true
-        graphView.fillType = ScrollableGraphViewFillType.gradient
-        graphView.fillColor = UIColor.init(colorLiteralRed: 85/255, green: 85/255, blue: 85/255, alpha: 1)
-        graphView.fillGradientType = ScrollableGraphViewGradientType.linear
-        graphView.fillGradientStartColor = UIColor.init(colorLiteralRed: 85/255, green: 85/255, blue: 85/255, alpha: 1)
-        graphView.fillGradientEndColor = UIColor.init(colorLiteralRed: 68/255, green: 68/255, blue: 68/255, alpha: 1)
-        
-        graphView.dataPointSpacing = 80
-        graphView.dataPointSize = 2
-        graphView.dataPointFillColor = UIColor.white
-        
-        graphView.referenceLineLabelFont = UIFont.boldSystemFont(ofSize: 8)
-        graphView.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
-        graphView.referenceLineLabelColor = UIColor.white
-        graphView.dataPointLabelColor = UIColor.white.withAlphaComponent(0.5)
-        
-        dataVis.addSubview(graphView)
+    var showDiagram : DetailView?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Since dataVis's frame is much larger then it should be when initialized in "viewDidLoad" and "viewWillAppear", put it right here without causing problem.
+        showDiagram = DetailView(frame: dataVis.frame)
     }
     
     override func viewDidLoad() {
