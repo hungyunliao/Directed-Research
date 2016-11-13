@@ -9,7 +9,7 @@
 import UIKit
 import JavaScriptCore
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DetailViewDelegate {
 
     @IBOutlet weak var textRegion: UILabel!
     @IBOutlet weak var dataVis: UIView!
@@ -20,6 +20,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     var tableCol1 = ["null"]
     var tableCol2 = [0.0]
+    
+    var showDiagram : DetailView?
+    var dataSource =  DetailModel()
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == table {
@@ -57,36 +60,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
     }
-    
-    // Hard-coded Json file for testing use
-    let JSO:[String:Any] = [
-        "year_and_month_total_consume": [
-            ["date": "2014-05", "total": 19.97],
-            ["date": "2014-04", "total": 272.12],
-            ["date": "2014-07", "total": 440.0],
-            ["date": "2014-06", "total": 2630.34]
-        ],
-        "location_total_consume": [
-            ["total": 2587.15, "location": "San Francisco"],
-            ["total": 5.32, "location": "Atlanta"],
-            ["total": 15.93, "location": "New York"],
-            ["total": 28.57, "location": "Metairie"],
-            ["total": 7.23, "location": "Winston Salem"]
-        ],
-        "categoty_transaction_total_consume": [
-            ["total": 880.0, "name": "Transfer"],
-            ["total": 2425.38, "name": "Shops"],
-            ["total": 44.31, "name": "Food and Drink"]
-        ],
-        "transfer_total_amount": 480,
-        "transaction_consume_total": 3362.4300000000003,
-        "transaction_consume_number": 12,
-        "category_transaction_consume_percent": [
-            ["percent": 73.333, "name": "Transfer"],
-            ["percent": 202.115, "name": "Shops"],
-            ["percent": 3.69, "name": "Food and Drink"]
-        ]
-    ]
     
     // Json parsing parameters
     var monthAmount : [[String:Any]]? = nil
@@ -162,8 +135,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         dataVis.addSubview((showDiagram?.dataVisualization(data: data, labels: labels))!)
     }
     
-    var showDiagram : DetailView?
     
+    // MARK: override functions
     override func viewDidAppear(_ animated: Bool) {
         // Since dataVis's frame is much larger then it should be when initialized in "viewDidLoad" and "viewWillAppear", put it right here without causing problem.
         showDiagram = DetailView(frame: dataVis.frame)
@@ -171,6 +144,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.delegate = self
         
         table.delegate = self
         table.dataSource = self
@@ -179,74 +153,46 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         col1Title.textColor = UIColor.white
         col2Title.textColor = UIColor.white
-        
         col1Title.text = "Item"
         col2Title.text = "Amount"
         
-        
+        dataSource.inputJson(json: toPass!)
         
         self.view.backgroundColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
-        
-        /*
-        // For connected JSON
-        if let json = try? JSONSerialization.jsonObject(with: toPass) as! [String:Any] {
-            if json.count == 1 {
-                print("something wrong.")
-            } else {
-                monthAmount = json["year_and_month_total_consume"] as! [[String : Any]]?
-                monthAmountLeng = monthAmount?.count
-                
-                locationAmount = json["location_total_consume"] as! [[String:Any]]?
-                locationAmountLeng = locationAmount?.count
-                
-                categoryAmount = json["categoty_transaction_total_consume"] as! [[String:Any]]?
-                categoryAmountLeng = categoryAmount?.count
-                
-                totalAmount = json["transaction_consume_total"] as! Double?
-                totalNumber = json["transaction_consume_number"] as! Int?
-                
-                categoryPercent = json["category_transaction_consume_percent"] as! [[String:Any]]?
-                categoryPercentLeng = categoryPercent?.count
-            }
-            
-        }
-        */
-        
-        
-        // For hard-code JSON
-        monthAmount = JSO["year_and_month_total_consume"] as! [[String : Any]]?
-        monthAmountLeng = monthAmount?.count
-        
-        locationAmount = JSO["location_total_consume"] as! [[String:Any]]?
-        locationAmountLeng = locationAmount?.count
-        
-        categoryAmount = JSO["categoty_transaction_total_consume"] as! [[String:Any]]?
-        categoryAmountLeng = categoryAmount?.count
-        
-        totalAmount = JSO["transaction_consume_total"] as! Double?
-        totalNumber = JSO["transaction_consume_number"] as! Int?
-        
-        categoryPercent = JSO["category_transaction_consume_percent"] as! [[String:Any]]?
-        categoryPercentLeng = categoryPercent?.count
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: delegate functions
+    func sendingJsonArray(person: DetailModel, type: FileCategory, data: [[String : Any]]) {
+        switch type {
+        case .category:
+            categoryAmount = data
+        case .location:
+            locationAmount = data
+        case .month:
+            monthAmount = data
+        default:
+            break
+        }
+    }
+    
+    func sendingJsonLength(person: DetailModel, type: FileCategory, length: Int) {
+        switch type {
+        case .category:
+            categoryAmountLeng = length
+        case .location:
+            locationAmountLeng = length
+        case .month:
+            monthAmountLeng = length
+        default:
+            break
+        }
+    }
 
 }
 
-func gradient(frame: CGRect) -> CAGradientLayer {
-    let gradient = CAGradientLayer()
-    
-    gradient.colors = [UIColor.cyan.cgColor, UIColor.white.cgColor]
-    gradient.locations = [0.0 , 1.0]
-    gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-    gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-    gradient.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
-    
-    return gradient
-}
