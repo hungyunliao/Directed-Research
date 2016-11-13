@@ -15,6 +15,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var dataVis: UIView!
     var toPass: Data!
     @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var col1Title: UILabel!
+    @IBOutlet weak var col2Title: UILabel!
     
     var tableCol1 = ["null"]
     var tableCol2 = [0.0]
@@ -41,7 +43,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DataTableViewCell
         
         cell.column1.text = tableCol1[indexPath.row]
-        cell.column2.text = "$ " + String(tableCol2[indexPath.row])
+        cell.column2.text = "$" + String(tableCol2[indexPath.row])
         
         cell.backgroundColor = UIColor.clear
         cell.column1.textColor = UIColor.white
@@ -106,6 +108,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     // Segment control
     @IBAction func shownDataType(_ sender: UISegmentedControl) {
+        
         let index = sender.selectedSegmentIndex
         var showString = ""
         var data: [Double] = []
@@ -114,7 +117,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         switch index {
         case 0:     // Location
             showString = "This is your statistics for the Locations that you made the purchase."
-            
+            col1Title.text = "Location"
             for i in 0..<locationAmount!.count {
                 data.append(locationAmount?[i]["total"] as! Double)
                 labels.append(locationAmount?[i]["location"] as! String)
@@ -123,7 +126,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         case 1:     // Category
             showString = "This is your statistics for the Categories that your purchases belong to."
-            
+            col1Title.text = "Category"
             for i in 0..<categoryAmount!.count {
                 data.append(categoryAmount?[i]["total"] as! Double)
                 labels.append(categoryAmount?[i]["name"] as! String)
@@ -132,6 +135,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         case 2:     // MonthlyAmount
             showString = "This is your statistics for the average purcahse amount."
+            col1Title.text = "Month"
             for i in 0..<monthAmount!.count {
                 data.append(monthAmount?[i]["total"] as! Double)
                 labels.append(monthAmount?[i]["date"] as! String)
@@ -140,6 +144,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         case 3:     // Transfer Frequency
             showString = "This is your statistics for your transfer frequency."
+            col1Title.text = "Category"
             for i in 0..<categoryPercent!.count {
                 data.append(categoryPercent?[i]["percent"] as! Double)
                 labels.append(categoryPercent?[i]["name"] as! String)
@@ -171,6 +176,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         table.dataSource = self
         table.backgroundColor = UIColor.clear
         table.separatorColor = UIColor.clear
+        
+        col1Title.textColor = UIColor.white
+        col2Title.textColor = UIColor.white
+        
+        col1Title.text = "Item"
+        col2Title.text = "Amount"
+        
+        
         
         self.view.backgroundColor = UIColor.init(colorLiteralRed: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         
